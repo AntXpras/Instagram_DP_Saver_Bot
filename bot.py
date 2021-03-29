@@ -6,15 +6,19 @@ from instaloader import Instaloader, Profile
 import time
 
 
-'''Coded by Anish Gowda 😃😃😃😃'''
+'''Coded by Anish Gowda'''
+'''Edited By @Xpras_id'''
+
 L = Instaloader()
 TOKEN = os.getenv("BOT_TOKEN")
 APP_NAME = os.getenv("APP_NAME")
 TELEGRAM_USERNAME = os.getenv("TELEGRAM_USERNAME")
 
-welcome_msg = '''<b>Welcome To the Bot</b>🖐🖐
- <i>Send me anyones instagram username to get their DP</i>
- ex : <b>virat.kohli</b> , <b>thenameisyash</b> etc'''
+welcome_msg = '''<b>S░░E░░L░░A░░M░░A░░T░░D░░A░░T░░A░░N░░G</b>🖐🖐
+ 
+ <i>Kirimkan Saya Nama Pengguna instagram (username) setelah itu saya akan menunjuka profil pengguna tersebut</i>
+
+contoh : <b>fuck.you</b> , <b>fuckyou</b> etc'''
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -24,9 +28,9 @@ logger = logging.getLogger(__name__)
 
 def acc_type(val):
     if(val):
-        return "🔒Private🔒"
+        return "ⓟⓡⓘⓥⓐⓣⓔ"
     else:
-        return "🔓Public🔓"
+        return "ⓟⓤⓑⓛⓘⓚ"
 
 # Start the Bot
 
@@ -38,12 +42,12 @@ def start(update, context):
 
 
 def help_msg(update, context):
-    update.message.reply_text("Nothing to help ,This is way to simple 😂😂")
+    update.message.reply_text("Tidak ada Bantuan atau /help Karna cara menggunakan bot ini sangatlah mudah dan simpel")
 
 
 def contact(update, context):
     keyboard = [[InlineKeyboardButton(
-        "Contact", url=f"telegram.me/{TELEGRAM_USERNAME}")], ]
+        "Contact Me", url=f"telegram.me/{TELEGRAM_USERNAME}")], ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
@@ -53,20 +57,21 @@ def contact(update, context):
 
 
 def username(update, context):
-    msg = update.message.reply_text("Downloading...")
+    msg = update.message.reply_text("Download Info Profile...")
     query = update.message.text
     chat_id = update.message.chat_id
     try:
         user = Profile.from_username(L.context, query)
-        caption_msg = f'''📛*Name*📛: {user.full_name} \n😁*Followers*😁: {user.followers} \n🤩*Following*🤩: {user.followees}\
-         \n🧐*Account Type*🧐: {acc_type(user.is_private)} \n\nThank You For Using The bot 😀😀'''
+        caption_msg = f'''*Nama*: {user.full_name} \n*Followers*: {user.followers} \n🤩*Following*🤩: {user.followees}\
+         \n🧐*Account Type*🧐: {acc_type(user.is_private)} \n\nTerimakasih telah menggunakan Bot ini Dont Forget To Join @cyntaxrobot'''
         context.bot.send_photo(
             chat_id=chat_id, photo=user.profile_pic_url,
             caption=caption_msg, parse_mode='MARKDOWN')
-        msg.edit_text("finished.")
+        msg.edit_text("Selesai.")
         time.sleep(5)
     except Exception:
-        msg.edit_text("Try again 😕😕 Check the username correctly")
+        msg.edit_text("Coba lagi -- Cek username Benar atau Salah --")
+
 
 
 def error(update, context):
